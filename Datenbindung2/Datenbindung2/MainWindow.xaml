@@ -44,7 +44,7 @@
     <Label Content="{Binding ElementName=LB, Path=SelectedItem}" Margin="5" Background="Salmon"
            ContentTemplate="{StaticResource PersonTemplate}"/>
     <Label Content="{Binding ElementName=LB, Path=SelectedItem}" Margin="5" Background="Lavender"/>
-    <Button Content="Die Jahre vergehen..." Margin="5" Click="AlterAnpassen"/>
+    <Button Content="Die Jahre vergehen..." Margin="5" Click="AlterAnpassen" />
     <Button Content="Neuer Mitarbeiter" Margin="5" Click="NeuerMitarbeiter"/>
   </StackPanel>
 </Window>
