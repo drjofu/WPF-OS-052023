@@ -7,9 +7,34 @@
         mc:Ignorable="d"
        
         Title="MainWindow" Height="450" Width="800">
+  <Window.Resources>
+    <local:SchriftgrößeConverter x:Key="SGC" Offset="50" Faktor="3"/>
+    <local:SmileyConverter x:Key="Smiley"/>
+  </Window.Resources>
   <StackPanel>
     <Slider x:Name="SL" Margin="5"/>
-    <TextBox Text="{Binding ElementName=SL, Path=Value, StringFormat={}{0:0.0}}" Margin="5"/>
-    <TextBox Margin="5"/>
+    
+    <TextBlock Text="{Binding ElementName=SL, Path=Value, Converter={StaticResource Smiley}}" FontSize="50"/>
+    
+    <TextBox Text="{Binding ElementName=SL, Path=Value, StringFormat={}{0:0.0}}" Margin="5"
+             FontSize="{Binding Value, ElementName=SL, Converter={StaticResource SGC}}"/>
+
+    <!--<ContentControl Margin="5">
+      <ContentControl.Resources>
+        <local:SchriftgrößeConverter x:Key="SGC2" Offset="250" Faktor="7"/>
+      </ContentControl.Resources>
+      <TextBox Text="{Binding ElementName=SL, Path=Value, StringFormat={}{0:0.0}}" 
+             FontSize="{Binding Value, ElementName=SL, Converter={StaticResource SGC2}}"/>
+    </ContentControl>-->
+    
+    <TextBox Margin="5" Text="Hallo Welt">
+      <TextBox.FontSize>
+        <Binding ElementName="SL" Path="Value">
+          <Binding.Converter>
+            <local:SchriftgrößeConverter Offset="60" Faktor="5"/>
+          </Binding.Converter>
+        </Binding>
+      </TextBox.FontSize>
+    </TextBox>
   </StackPanel>
 </Window>
