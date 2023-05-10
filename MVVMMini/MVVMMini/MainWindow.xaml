@@ -20,7 +20,11 @@
     <Button Content="-" HorizontalAlignment="Left" Margin="336,169,0,0" VerticalAlignment="Top" Height="29" Width="53" Command="{Binding MinusCommand}"/>
     <TextBlock HorizontalAlignment="Left" Margin="232,239,0,0" TextWrapping="Wrap" Text="{Binding Ergebnis}" VerticalAlignment="Top" Width="110"/>
 
-    <Slider HorizontalAlignment="Left" Margin="138,91,0,0" VerticalAlignment="Top" Width="120" Maximum="10000" Value="{Binding Zahl1}"/>
+    <Slider HorizontalAlignment="Left" Margin="138,91,0,0" VerticalAlignment="Top" Width="120" Maximum="10000" Value="{Binding Zahl1}">
+      <b:Interaction.Behaviors>
+        <local:SliderMouseWheelBehavior/>
+      </b:Interaction.Behaviors>
+    </Slider>
     <Slider HorizontalAlignment="Left" Margin="329,91,0,0" VerticalAlignment="Top" Width="120" Maximum="10000" Value="{Binding Zahl2}"/>
     <Menu VerticalAlignment="Top">
       <MenuItem Header="Rechnen">
