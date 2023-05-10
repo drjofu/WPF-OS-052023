@@ -27,7 +27,7 @@
 
     <Verkehr:Ampel HorizontalAlignment="Left" Margin="108,99,0,0" VerticalAlignment="Top" Background="#FF353232" 
                    IstGrün="{Binding IsChecked, ElementName=checkBox}"/>
-    <CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="270,169,0,0" VerticalAlignment="Top"/>
+    <CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="270,169,0,0" VerticalAlignment="Top" IsChecked="True"/>
     <Verkehr:Ampel Style="{DynamicResource AmpelStyle1}" HorizontalAlignment="Left" Margin="433,99,0,0" VerticalAlignment="Top" Background="#FF353232" 
       IstGrün="{Binding IsChecked, ElementName=checkBox}"/>
 
