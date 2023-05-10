@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,9 @@ namespace Verkehr
   ///     <MyNamespace:CustomControl1/>
   ///
   /// </summary>
+  [DefaultProperty(nameof(IstGrün))]
+  [TemplatePart(Name = "PART_LampeRot", Type = typeof(Shape))]
+  [TemplatePart(Name = "PART_LampeGruen", Type = typeof(Shape))]
   public class Ampel : Control
   {
     static Ampel()
@@ -51,8 +55,11 @@ namespace Verkehr
       DefaultStyleKeyProperty.OverrideMetadata(typeof(Ampel), new FrameworkPropertyMetadata(typeof(Ampel)));
     }
 
+    private Shape lampeRot;
+    private Shape lampeGrün;
 
-
+    [Category("Verkehr")]
+    [Description("Schaltet die Ampel auf grün (true) oder rot (false)")]
     public bool IstGrün
     {
       get { return (bool)GetValue(IstGrünProperty); }
@@ -61,12 +68,37 @@ namespace Verkehr
 
     // Using a DependencyProperty as the backing store for IstGrün.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty IstGrünProperty =
-        DependencyProperty.Register("IstGrün", typeof(bool), typeof(Ampel),
+        DependencyProperty.Register(nameof(IstGrün), typeof(bool), typeof(Ampel),
           new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIstGrünChanged));
 
     private static void OnIstGrünChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-      
+      var ampel = d as Ampel;
+      ampel.Schalten();
+    }
+
+    public override void OnApplyTemplate()
+    {
+      base.OnApplyTemplate();
+      lampeRot = (Shape)this.GetTemplateChild("PART_LampeRot");
+      lampeGrün = (Shape)this.GetTemplateChild("PART_LampeGruen");
+      Schalten();
+    }
+
+    private void Schalten()
+    {
+      if (lampeRot is null) return;
+
+      if (this.IstGrün)
+      {
+        lampeGrün.Opacity = 1;
+        lampeRot.Opacity=0.2;
+      }
+      else
+      {
+        lampeGrün.Opacity = 0.2;
+        lampeRot.Opacity = 1;
+      }
     }
   }
 }
